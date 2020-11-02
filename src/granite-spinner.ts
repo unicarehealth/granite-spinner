@@ -34,7 +34,7 @@ export class GraniteSpinner extends LitElement {
     return [
       css`
           :host {
-            display: inline-block;
+            display: block;
             position: relative;
             width:100%;
           }
@@ -92,6 +92,7 @@ export class GraniteSpinner extends LitElement {
 
   render(): TemplateResult {
     const spinnerDimensions = { width: this.size ? `${this.size}px` : `10em`, height: this.size ? `${this.size}px` : `10em` };
+    const spinnerStyle = { borderLeftColor: this.color, borderWidth: this.lineWidth, ...spinnerDimensions};
 
     return html`
     ${!this.active ? html`` :
@@ -105,10 +106,7 @@ export class GraniteSpinner extends LitElement {
               <div
                 id="spinner"
                 class="loading"
-                style="border-left-color: ${this.color};
-                        border-width: ${this.lineWidth};
-                        ${styleMap(spinnerDimensions)}
-                        ">
+                style=${styleMap(spinnerStyle)}>
               </div>
 
               <div style=${styleMap(spinnerDimensions)}></div>
