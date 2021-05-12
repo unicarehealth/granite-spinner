@@ -1,6 +1,6 @@
-import { html, LitElement, customElement, property, css, CSSResultArray } from "lit-element";
-import { TemplateResult } from "lit-html";
-import { styleMap } from "lit-html/directives/style-map";
+import { html, LitElement, css, CSSResultArray, TemplateResult } from "lit";
+import { customElement, property } from "lit/decorators";
+import { styleMap } from "lit/directives/style-map";
 
 @customElement("granite-spinner")
 export class GraniteSpinner extends LitElement {
@@ -36,16 +36,17 @@ export class GraniteSpinner extends LitElement {
           :host {
             display: block;
             position: relative;
-            width:100%;
+            width: 100%;
           }
 
-          #spinner-container {
+          #spinnerContainer {
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
-            width:100%;
+            width: 100%;
           }
+
           #spinner {
             margin: 60px auto;
             font-size: 10px;
@@ -91,26 +92,31 @@ export class GraniteSpinner extends LitElement {
   }
 
   render(): TemplateResult {
-    const spinnerDimensions = { width: this.size ? `${this.size}px` : `10em`, height: this.size ? `${this.size}px` : `10em` };
-    const spinnerStyle = { borderLeftColor: this.color, borderWidth: this.lineWidth, ...spinnerDimensions};
+    if (!this.active) {
+      return html``;
+    }
 
-    return html`
-    ${!this.active ? html`` :
-        html`<div
-                id="spinner-container"
-                style="position: ${this.hover ? `absolute` : `relative`};
-                        min-width: ${this.size}px;
-                        min-height: ${this.size}px;
-                        height: ${Math.max(this.size, this.containerHeight, 200)}px;
-                        ">
-              <div
-                id="spinner"
-                class="loading"
-                style=${styleMap(spinnerStyle)}>
-              </div>
+    const containerStyle = {
+      position: this.hover ? "absolute" : "relative",
+      minWidth: `${this.size}px`,
+      minHeight: `${this.size}px`,
+      height: `${Math.max(this.size, this.containerHeight, 200)}px`
+    };
 
+    const spinnerDimensions = {
+      width: this.size ? `${this.size}px` : `10em`,
+      height: this.size ? `${this.size}px` : `10em`
+    };
+
+    const spinnerStyle = {
+      borderLeftColor: this.color,
+      borderWidth: this.lineWidth,
+      ...spinnerDimensions
+    };
+
+    return html`<div id="spinnerContainer" style=${styleMap(containerStyle)}>
+              <div id="spinner" style=${styleMap(spinnerStyle)}></div>
               <div style=${styleMap(spinnerDimensions)}></div>
-            </div>`
-      }`;
+            </div>`;
   }
 }
