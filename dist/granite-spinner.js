@@ -5,7 +5,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { html, LitElement, css } from "lit";
-import { customElement, property } from "lit/decorators";
+import { customElement, property } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map";
 let GraniteSpinner = class GraniteSpinner extends LitElement {
     constructor() {

@@ -1,5 +1,5 @@
 import { html, LitElement, css, CSSResultArray, TemplateResult } from "lit";
-import { customElement, property } from "lit/decorators";
+import { customElement, property } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map";
 
 @customElement("granite-spinner")
